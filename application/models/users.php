@@ -22,4 +22,9 @@ class Users extends CI_Model
 		else
 			return FALSE;
 	}
+	public function getPolygon()
+	{
+		$query = $this->db->get('polygon');
+		return $query->result_array();
+	}
 }

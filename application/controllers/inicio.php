@@ -10,6 +10,10 @@ class Inicio extends CI_Controller {
 	{
 		$this->load->view('map');
 	}
+	public function polygons()
+	{
+		echo json_encode($this->users->getPolygon());
+	}
 	public function login()
 	{
 		if(isset($_POST) && count($_POST)>0)
