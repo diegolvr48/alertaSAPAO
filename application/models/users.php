@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Users extends CI_Model 
+class Users extends CI_Model
 {
 	public function getUser($data='')
 	{
-		$query = $this->db->get_where('users',array($data));
+		$query = $this->db->get_where('users',$data);
 		if($query->num_rows()>0)
 		{
 			return $query->row_array();
@@ -24,7 +24,7 @@ class Users extends CI_Model
 	}
 	public function getPolygon()
 	{
-		$query = $this->db->get('polygon');
+		$query = $this->db->get_where('polygon');
 		return $query->result_array();
 	}
 }

@@ -1,14 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Inicio extends CI_Controller {
-	function __contruct()
-	{
-		parent::__contruct();
+	function __construct()
+  {
+    parent::__construct();
 		$this->load->model('users');
 	}
 	public function index()
 	{
-		$this->load->view('map');
+		$this->load->view('index');
+	}
+	public function mapa()
+	{
+		$this->load->view('mapa');
 	}
 	public function polygons()
 	{
@@ -51,7 +55,7 @@ class Inicio extends CI_Controller {
 			if(isset($_POST) && count($_POST) > 0)
 			{
 				$data = $this->input->post();
-				foreach ($data['colonias'] as $colonia) 
+				foreach ($data['colonias'] as $colonia)
 				{
 					$this->users->setSuministro(array('nombre'=>$colonia,'turno'=>$data['turno']));
 				}
