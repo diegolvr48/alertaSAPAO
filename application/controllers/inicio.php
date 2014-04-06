@@ -14,6 +14,14 @@ class Inicio extends CI_Controller {
 	{
 		$this->load->view('mapa');
 	}
+	public function reportes()
+	{
+		$this->load->view('reportes');
+	}
+	public function estadisticas()
+	{
+		$this->load->view('estadisticas');
+	}
 	public function polygons()
 	{
 		echo json_encode($this->users->getPolygon());
