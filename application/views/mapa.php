@@ -64,11 +64,10 @@
                     dataType:'JSON',
                     async:false,
                     success:function(data){
-                        $(data).each( function(index, val) {
-                            if(i == parseInt(val.id))
-                            {
-                                points.push(new google.maps.LatLng(parseFloat(val.latitud),parseFloat(val.longitud)));
-                            }else{
+                        $(data.colonias).each( function(index, val) {
+                            $(val).each(function(i,item){
+                                points.push(new google.maps.LatLng(item.latitud,item.longitud));
+                            });
                                 var Triangle = new google.maps.Polygon({
                                   paths: points,
                                   strokeColor: '#FF0000',
@@ -79,18 +78,7 @@
                                 });
                                 triangleCoords.push(Triangle);
                                 points = [];
-                                i++;
-                            }
                         });
-                        var Triangle = new google.maps.Polygon({
-                            paths: points,
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 0.8,
-                            strokeWeight: 2,
-                            fillColor: '#'+genColor(),
-                            fillOpacity: 0.35
-                        });
-                        triangleCoords.push(Triangle);
                     }
                  })
             })
@@ -299,6 +287,23 @@ function handleNoGeolocation(errorFlag) {
   map.setCenter(options.position);
 }
 
+function buscar (colonia) {
+  $.ajax({
+    url: "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address="+item.municipios+', OAXACA',
+    type: 'GET',
+    dataType: "JSON",
+    async:false,
+    success:function(data){
+      if(data.status === "OK"){
+        //$.post("<?php echo site_url()?>/inicio/",{id:item.id,latitud:data.results[0].geometry.location.lat,longitud:data.results[0].geometry.location.lng},function(){});
+        new map.Marker({
+
+        })
+      }
+    //alert('Latitud: '+data.results[0].geometry.location.lat+' Longitud:'+data.results[0].geometry.location.lng)
+    }
+  })
+}
 google.maps.event.addDomListener(window, 'load', initialize);
         </script>
 

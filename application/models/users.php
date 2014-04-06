@@ -22,10 +22,17 @@ class Users extends CI_Model
 		else
 			return FALSE;
 	}
-	public function getPolygon()
+	public function getPolygon($col_id)
 	{
-		$query = $this->db->get_where('polygon');
+		$this->db->where('id',$col_id);
+		$query = $this->db->get('polygon');
 		return $query->result_array();
+	}
+	public function getIDCOL($name='')
+	{
+		$this->db->like('field2',$name);
+		$query = $this->db->get('col_mun');
+		return $query->row_array();
 	}
 	public function getVecesxColonia()
 	{
@@ -58,5 +65,10 @@ class Users extends CI_Model
 			return $query->row_array();
 		else
 			return FALSE;
+	}
+	public function getSuministro()
+	{
+		$cols = $this->db->get_where('suministro',array('fecha'=>date('Y-m-d')));
+	 return $cols->result_array();
 	}
 }

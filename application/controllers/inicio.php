@@ -24,7 +24,18 @@ class Inicio extends CI_Controller {
 	}
 	public function polygons()
 	{
-		echo json_encode($this->users->getPolygon());
+		$polygons = array();
+		$suministradas = $this->users->getSuministro();
+		foreach ($suministradas as $lugar) {
+			if(preg_match('/COL./', $lugar['nombre']))
+			{
+				$col_name =  preg_replace('/COL. /','' , $lugar['nombre']);
+				$col_map = $this->users->getIDCOL($col_name);
+				if(isset($col_map['field1']))
+					$polygons['colonias'][] = $this->users->getPolygon($col_map['field1']);
+			}
+		}
+		echo json_encode($polygons);
 	}
 	public function login()
 	{
