@@ -55,8 +55,8 @@
                     <i class="fa fa-check fa-5x"></i>
                   </div>
                   <div class="col-xs-8 text-right">
-                    <p class="announcement-heading" id="total_requests"></p>
-                    <p class="announcement-text">Solicitudes!</p>
+                    <p class="announcement-text" id="total_requests"></p>
+                    <p class="announcement-text" id="num_req"></p>
                   </div>
                 </div>
               </div>
@@ -70,8 +70,8 @@
                     <i class="fa fa-users fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading" id="unique_visitors"></p>
-                    <p class="announcement-text">Visitantes</p>
+                    <p class="announcement-text" id="mat"></p>
+                    <p class="announcement-text" id="num_mat"></p>
                   </div>
                 </div>
               </div>
@@ -85,8 +85,8 @@
                     <i class="fa fa-tasks fa-5x"></i>
                   </div>
                   <div class="col-xs-8 text-right">
-                    <p class="announcement-heading" id="failed_requests"></p>
-                    <p class="announcement-text">Solicitudes Fallidas</p>
+                    <p class="announcement-text" id="vest"></p>
+                    <p class="announcement-text" id="num_vest"></p>
                   </div>
                 </div>
               </div>
@@ -100,8 +100,8 @@
                     <i class="fa fa-file fa-5x"></i>
                   </div>
                   <div class="col-xs-8 text-right">
-                    <p class="announcement-heading" id="unique_files"></p>
-                    <p class="announcement-text">Archivos!</p>
+                    <p class="announcement-text" id="noct"></p>
+                    <p class="announcement-text" id="num_noct"></p>
                   </div>
                 </div>
               </div>
@@ -146,5 +146,101 @@
         </div><!-- /.row -->
 
       </div><!-- /#page-wrapper -->
+    <script src="<?php echo base_url()?>site_media/js/vendor/jquery-1.11.0.min.js"></script>
+    <script src="<?php echo base_url()?>site_media/js/morris/raphael-min.js"></script>
+    <script src="<?php echo base_url()?>site_media/js/morris/morris-0.4.3.min.js"></script>
+    <script src="<?php echo base_url()?>site_media/js/morris/chart-data-morris.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        var colonias = [],
+            status_codes = [],
+            hosts = [];
+        $.ajax({
+          url: '<?php echo site_url("inicio/reportes1")?>',
+          type: 'GET',
+          dataType: 'JSON',
+          async: false
+        }).done(function(data){
+          $(data.vXc).each(function(i,item){
+            if(i <= 10)
+            {
+              colonias.push({nombre:i,cant:item.cantidad});
+            }
+            else
+            {
+              return false;
+            }
+
+          })
+          $('#total_requests').html(data.ganona.nombre);
+          $('#num_req').html(data.ganona.maximo);
+          $('#mat').html(data.coloniaM.nombre);
+          $('#num_mat').html(data.coloniaM.maximo);
+          $('#vest').html(data.coloniaV.nombre);
+          $('#num_vest').html(data.coloniaV.maximo);
+          $('#noct').html(data.coloniaN.nombre);
+          $('#num_noct').html(data.coloniaN.maximo);
+          status_codes.push({label:data.coloniaM.nombre,value:data.coloniaM.maximo});
+          status_codes.push({label:data.coloniaV.nombre,value:data.coloniaV.maximo});
+          status_codes.push({label:data.coloniaN.nombre,value:data.coloniaN.maximo});
+          $(data.turnoV).each(function(i,item){
+            if(i <= 10)
+            {
+              hosts.push({nombre:item.nombre,value:item.cantidad})
+            }
+            else
+            {
+              return false;
+            }
+          });
+          Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'morris-chart-area',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: colonias,
+            // The name of the data record attribute that contains x-visitss.
+            xkey: 'nombre',
+            // A list of names of data record attributes that contain y-visitss.
+            ykeys: ['cant'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Cantidad'],
+            // Disables line smoothing
+            smooth: false,
+            lineColors: ['#16a085'],
+          });
+          Morris.Donut({
+            element: 'morris-chart-donut',
+            data: status_codes,
+            colors: [
+              '#2ecc71',
+              '#2980b9',
+              '#9b59b6',
+              '#e74c3c'
+            ],
+            formatter: function (y) { return y + "%" ;}
+          });
+          Morris.Bar({
+            // ID of the element in which to draw the chart.
+            element: 'morris-chart-line',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: hosts,
+            // The name of the data record attribute that contains x-visitss.
+            xkey: 'nombre',
+            // A list of names of data record attributes that contain y-visitss.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Valor'],
+            // Disables line smoothing
+            barRatio: 0.4,
+            xLabelAngle: 10,
+            hideHover: 'auto'
+          });
+        })
+      })
+    </script>
   </body>
 </html>

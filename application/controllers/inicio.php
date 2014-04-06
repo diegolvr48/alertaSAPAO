@@ -75,40 +75,40 @@ class Inicio extends CI_Controller {
 			}
 		}
 	}
-	public function reportes()
+	public function reportes1()
 	{
 		$response = [];
 		if($data = $this->users->getVecesxColonia())
 		{
-			$response[] = array('vXc'=>$data);
+			$response['vXc'] = $data;
 		}
 		if($data = $this->users->getGanona())
 		{
-			$response[] = array('ganona'=>$data);
+			$response['ganona'] = $data;
 		}
 		if($data = $this->users->getPorturno('M'))
 		{
-			$response[] = array('turnoM'=>$data);
+			$response['turnoM'] = $data;
 		}
 		if($data = $this->users->getPorturno('V'))
 		{
-			$response[] = array('turnoV'=>$data);
+			$response['turnoV'] = $data;
 		}
 		if($data = $this->users->getPorturno('N'))
 		{
-			$response[] = array('turnoN'=>$data);
+			$response['turnoN'] = $data;
 		}
 		if($data = $this->users->getColoniaTurno('M'))
 		{
-			$response[] = array('coloniaM'=>$data);
+			$response['coloniaM'] = $data;
 		}
 		if($data = $this->users->getColoniaTurno('V'))
 		{
-			$response[] = array('coloniaV'=>$data);
+			$response['coloniaV'] = $data;
 		}
 		if($data = $this->users->getColoniaTurno('N'))
 		{
-			$response[] = array('coloniaN'=>$data);
+			$response['coloniaN'] = $data;
 		}
 		echo json_encode($response);
 	}

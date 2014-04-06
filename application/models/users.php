@@ -29,7 +29,7 @@ class Users extends CI_Model
 	}
 	public function getVecesxColonia()
 	{
-		$query = $this->db->query('SELECT nombre,count(a.nombre) as cantidad from (SELECT DISTINCT nombre, fecha FROM suministro) as a group by a.nombre ORDER BY cantidad');
+		$query = $this->db->query('SELECT nombre,count(a.nombre) as cantidad from (SELECT DISTINCT nombre, fecha FROM suministro) as a group by a.nombre ORDER BY cantidad DESC');
 		if($query -> num_rows()>0)
 			return $query->result_array();
 		else
@@ -45,7 +45,7 @@ class Users extends CI_Model
 	}
 	public function getPorturno($tipo='')
 	{
-		$query = $this->db->query('SELECT nombre,count(a.turno) as cantidad from (SELECT nombre, turno FROM suministro where (turno="'.$tipo.'")) as a group by nombre ORDER BY cantidad');
+		$query = $this->db->query('SELECT nombre,count(a.turno) as cantidad from (SELECT nombre, turno FROM suministro where (turno="'.$tipo.'")) as a group by nombre ORDER BY cantidad desc');
 		if($query->num_rows()>0)
 			return $query->result_array();
 		else
