@@ -46,10 +46,14 @@
           </a>
         </div>
         <div class="col-md-4">
-          <img src="<?php echo base_url()?>site_media/img/icono2.png" alt="">
+          <a href="<?php echo site_url('inicio/reportes')?>">
+            <img src="<?php echo base_url()?>site_media/img/icono2.png" alt="">
+          </a>
         </div>
         <div class="col-md-4">
-          <img src="<?php echo base_url()?>site_media/img/icono3.png" alt="">
+          <a href="<?php echo site_url('inicio/estadisticas')?>">
+            <img src="<?php echo base_url()?>site_media/img/icono3.png" alt="">
+          </a>
         </div>
       </div>
     </div> <!-- /container -->

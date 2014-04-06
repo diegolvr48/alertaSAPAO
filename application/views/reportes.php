@@ -34,10 +34,10 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#about">Mapa</a></li>
-            <li class="active"><a href="#contact">Reportes</a></li>
-            <li><a href="#contact">Estadisticas</a></li>
+            <li><a href="<?php echo base_url();?>">Inicio</a></li>
+            <li><a href="<?php echo site_url('inicio/mapa');?>">Mapa</a></li>
+            <li class="active"><a href="<?php echo site_url('inicio/reportes');?>">Reportes</a></li>
+            <li><a href="<?php echo site_url('inicio/estadisticas');?>">Estadisticas</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

@@ -6,13 +6,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard</title>
+    <title>AlertaSAPAO - Estadisticas</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?php echo base_url()?>site_media/css/bootstrap.min.css">
     <style>
       body {
-        padding-top: 60px;
+        padding-top: 65px;
         padding-bottom: 20px;
       }
     </style>
@@ -40,7 +40,7 @@
             <li><a href="<?php echo base_url();?>">Inicio</a></li>
             <li><a href="<?php echo site_url('inicio/mapa');?>">Mapa</a></li>
             <li><a href="<?php echo site_url('inicio/reportes');?>">Reportes</a></li>
-            <li class="active"><a href="<?php echo site_url('inicio/estaditicas');?>">Estadisticas</a></li>
+            <li class="active"><a href="<?php echo site_url('inicio/estadisticas');?>">Estadisticas</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -113,7 +113,7 @@
           <div class="col-lg-12">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Estadísticas de tráfico</h3>
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Colonias con más suministro</h3>
               </div>
               <div class="panel-body">
                 <div id="morris-chart-area"></div>
@@ -172,13 +172,13 @@
             }
 
           })
-          $('#total_requests').html(data.ganona.nombre);
+          $('#total_requests').html('<strong>'+data.ganona.nombre+'</strong>');
           $('#num_req').html(data.ganona.maximo);
-          $('#mat').html(data.coloniaM.nombre);
+          $('#mat').html('<strong>'+data.coloniaM.nombre+'</strong>');
           $('#num_mat').html(data.coloniaM.maximo);
-          $('#vest').html(data.coloniaV.nombre);
+          $('#vest').html('<strong>'+data.coloniaV.nombre+'</strong>');
           $('#num_vest').html(data.coloniaV.maximo);
-          $('#noct').html(data.coloniaN.nombre);
+          $('#noct').html('<strong>'+data.coloniaN.nombre+'</strong>');
           $('#num_noct').html(data.coloniaN.maximo);
           status_codes.push({label:data.coloniaM.nombre,value:data.coloniaM.maximo});
           status_codes.push({label:data.coloniaV.nombre,value:data.coloniaV.maximo});
@@ -193,7 +193,7 @@
               return false;
             }
           });
-          Morris.Line({
+          Morris.Area({
             // ID of the element in which to draw the chart.
             element: 'morris-chart-area',
             // Chart data records -- each entry in this array corresponds to a point on

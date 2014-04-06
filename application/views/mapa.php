@@ -39,10 +39,10 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Inicio</a></li>
-            <li class="active"><a href="#about">Mapa</a></li>
-            <li><a href="#contact">Reportes</a></li>
-            <li><a href="#contact">Estadisticas</a></li>
+            <li><a href="<?php echo base_url()?>">Inicio</a></li>
+            <li class="active"><a href="<?php echo site_url()?>/inicio/mapa">Mapa</a></li>
+            <li><a href="<?php echo site_url()?>/inicio/reportes">Reportes</a></li>
+            <li><a href="<?php echo site_url()?>/inicio/estadisticas">Estadisticas</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -96,12 +96,10 @@
             })
 
 function genColor() {
-  // take 3 random values, presumably this will be similar to MD5 bytes
   var r = Math.floor(Math.random() * 255);
   var g = Math.floor(Math.random() * 255);
   var b = Math.floor(Math.random() * 255);
 
-  // floor again
   r = Math.floor(r);
   g = Math.floor(g);
   b = Math.floor(b);
@@ -120,7 +118,6 @@ function genColor() {
   var gstr = g.toString(16);
   var bstr = b.toString(16);
 
-  // pad 0's -- probably a better way, but this was easy enough.
   if (rstr.length === 1) {
     rstr = "0" + rstr;
   }
@@ -268,12 +265,13 @@ function initialize() {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Location found using HTML5.'
+      var marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title: 'Aqui Toy XD',
+          icon:"<?php echo base_url()?>site_media/img/marker.png",
+          animation: google.maps.Animation.DROP
       });
-
       map.setCenter(pos);
     }, function() {
       handleNoGeolocation(true);
