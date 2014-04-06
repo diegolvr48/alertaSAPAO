@@ -71,7 +71,7 @@
                                 var Triangle = new google.maps.Polygon({
                                   paths: points,
                                   strokeColor: '#FF0000',
-                                  strokeOpacity: 0.8,
+                                  strokeOpacity: 0.9,
                                   strokeWeight: 2,
                                   fillColor: '#'+genColor(),
                                   fillOpacity: 0.35
@@ -84,39 +84,10 @@
             })
 
 function genColor() {
-  var r = Math.floor(Math.random() * 255);
-  var g = Math.floor(Math.random() * 255);
-  var b = Math.floor(Math.random() * 255);
-
-  r = Math.floor(r);
-  g = Math.floor(g);
-  b = Math.floor(b);
-
-  if (r < 50 && g < 50 && b < 50) r += 50;
-
-  if (r > 150 && g > 150 && b > 150) r -= 100;
-
-  if (Math.abs(r - g) < 50 && Math.abs(r - b) < 50 && Math.abs(g - b) < 50) {
-    if (r > 50) r -= 50;
-    if (g > 50) g -= 50;
-    if (b < 200) b += 50;
-  }
-
-  var rstr = r.toString(16);
-  var gstr = g.toString(16);
-  var bstr = b.toString(16);
-
-  if (rstr.length === 1) {
-    rstr = "0" + rstr;
-  }
-  if (gstr.length === 1) {
-    gstr = "0" + gstr;
-  }
-  if (bstr.length === 1) {
-    bstr = "0" + bstr;
-  }
-
-  return rstr + gstr + bstr;
+  var colores = ['1F3A93','1E824C','8E44AD'];
+  var color = colores[Math.floor((Math.random()*4))];
+      console.log(color);
+  return color;
 }
         </script>
         <script type="text/javascript">
