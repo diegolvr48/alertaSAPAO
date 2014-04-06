@@ -67,4 +67,41 @@ class Inicio extends CI_Controller {
 			}
 		}
 	}
+	public function reportes()
+	{
+		$response = [];
+		if($data = $this->users->getVecesxColonia())
+		{
+			$response[] = array('vXc'=>$data);
+		}
+		if($data = $this->users->getGanona())
+		{
+			$response[] = array('ganona'=>$data);
+		}
+		if($data = $this->users->getPorturno('M'))
+		{
+			$response[] = array('turnoM'=>$data);
+		}
+		if($data = $this->users->getPorturno('V'))
+		{
+			$response[] = array('turnoV'=>$data);
+		}
+		if($data = $this->users->getPorturno('N'))
+		{
+			$response[] = array('turnoN'=>$data);
+		}
+		if($data = $this->users->getColoniaTurno('M'))
+		{
+			$response[] = array('coloniaM'=>$data);
+		}
+		if($data = $this->users->getColoniaTurno('V'))
+		{
+			$response[] = array('coloniaV'=>$data);
+		}
+		if($data = $this->users->getColoniaTurno('N'))
+		{
+			$response[] = array('coloniaN'=>$data);
+		}
+		echo json_encode($response);
+	}
 }

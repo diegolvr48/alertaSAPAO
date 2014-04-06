@@ -27,4 +27,36 @@ class Users extends CI_Model
 		$query = $this->db->get_where('polygon');
 		return $query->result_array();
 	}
+	public function getVecesxColonia()
+	{
+		$query = $this->db->query('SELECT nombre,count(a.nombre) from (SELECT DISTINCT nombre, fecha FROM suministro) as a group by a.nombre');
+		if($query -> num_rows()>0)
+			return $query->result_array();
+		else
+			return FALSE;
+	}
+	public function getGanona()
+	{
+		$query = $this->db->query('SELECT DISTINCT nombre, COUNT(fecha) maximo FROM suministro GROUP BY nombre ORDER BY maximo DESC LIMIT 1');
+		if($query->num_rows()>0)
+			return $query->row_array();
+		else
+			return FALSE;
+	}
+	public function getPorturno($tipo='')
+	{
+		$query = $this->db->query('SELECT nombre,count(a.turno) from (SELECT nombre, turno FROM suministro where (turno="'.$tipo.'")) as a group by nombre');
+		if($query->num_rows()>0)
+			return $query->result_array();
+		else
+			return FALSE;
+	}
+	public function getColoniaTurno($tipo='')
+	{
+		$query = $this->db->query('SELECT nombre, turno ,count(turno) maximo from suministro where (turno="'.$tipo.'") GROUP BY nombre ORDER BY maximo DESC LIMIT 1');
+		if($query->num_rows()>0)
+			return $query->row_array();
+		else
+			return FALSE;
+	}
 }
